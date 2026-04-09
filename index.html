@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BazaarX — Buy & Sell Anything</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- <h2>Image Test</h2>
+  <img src="http://localhost:3000/uploads/iphone.jpg" width="200"> -->
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">BazaarX</span>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <div class="search-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search products, categories..." />
+        <button class="search-btn" onclick="searchProducts()">Search</button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button class="icon-btn" id="darkToggle" title="Toggle dark mode" onclick="toggleDark()">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="icon-btn wishlist-nav-btn" title="Wishlist" onclick="showSection('wishlistSection')">
+        <i class="fas fa-heart"></i>
+        <span class="badge" id="wishBadge">0</span>
+      </button>
+      <div id="navAuth">
+        <button class="btn-outline" onclick="showSection('authSection')">Login</button>
+        <button class="btn-primary" onclick="showSection('authSection')">Sign Up</button>
+      </div>
+      <div id="navUser" style="display:none">
+        <span class="user-greeting" id="greetUser"></span>
+        <button class="btn-primary" onclick="showSection('addProductSection')">+ Sell</button>
+        <button class="btn-outline" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="heroSection">
+    <div class="hero-content">
+      <h1>Buy. Sell. <span class="accent">Repeat.</span></h1>
+      <p>India's freshest peer-to-peer marketplace. No middlemen. Just real deals.</p>
+      <div class="hero-btns">
+        <button class="btn-primary large" onclick="scrollToProducts()">Browse Listings</button>
+        <button class="btn-ghost large" onclick="showSection('authSection')">Start Selling →</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card fc1"><i class="fas fa-mobile-alt"></i><span>Electronics</span></div>
+      <div class="floating-card fc2"><i class="fas fa-tshirt"></i><span>Fashion</span></div>
+      <div class="floating-card fc3"><i class="fas fa-couch"></i><span>Furniture</span></div>
+      <div class="floating-card fc4"><i class="fas fa-car"></i><span>Vehicles</span></div>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORY FILTER ===== -->
+  <section class="category-bar" id="mainContent">
+    <div class="container">
+      <div class="cat-pills">
+        <button class="pill active" onclick="filterCategory('all', this)">All</button>
+        <button class="pill" onclick="filterCategory('electronics', this)"><i class="fas fa-mobile-alt"></i> Electronics</button>
+        <button class="pill" onclick="filterCategory('fashion', this)"><i class="fas fa-tshirt"></i> Fashion</button>
+        <button class="pill" onclick="filterCategory('furniture', this)"><i class="fas fa-couch"></i> Furniture</button>
+        <button class="pill" onclick="filterCategory('vehicles', this)"><i class="fas fa-car"></i> Vehicles</button>
+        <button class="pill" onclick="filterCategory('books', this)"><i class="fas fa-book"></i> Books</button>
+        <button class="pill" onclick="filterCategory('sports', this)"><i class="fas fa-futbol"></i> Sports</button>
+        <button class="pill" onclick="filterCategory('other', this)"><i class="fas fa-box"></i> Other</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTS GRID ===== -->
+  <section class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="sectionTitle">Fresh Listings</h2>
+        <span id="productCount" class="count-badge">0 items</span>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- Cards injected by JS -->
+      </div>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="empty-icon">🛍️</div>
+        <h3>No products found</h3>
+        <p>Be the first to list something!</p>
+        <button class="btn-primary" onclick="showSection('addProductSection')">+ Add Product</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WISHLIST SECTION ===== -->
+  <section class="modal-overlay" id="wishlistSection" style="display:none">
+    <div class="modal wide">
+      <div class="modal-header">
+        <h2><i class="fas fa-heart"></i> My Wishlist</h2>
+        <button class="close-btn" onclick="hideSection('wishlistSection')">✕</button>
+      </div>
+      <div class="products-grid" id="wishlistGrid"></div>
+      <div class="empty-state" id="wishlistEmpty" style="display:none">
+        <div class="empty-icon">💔</div>
+        <h3>Your wishlist is empty</h3>
+        <p>Tap the heart on any product to save it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AUTH SECTION ===== -->
+  <section class="modal-overlay" id="authSection" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="authTitle">Welcome Back</h2>
+        <button class="close-btn" onclick="hideSection('authSection')">✕</button>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab" onclick="switchAuth('login')">Login</button>
+        <button class="auth-tab" id="signupTab" onclick="switchAuth('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••"/>
+        </div>
+        <div class="form-error" id="loginError"></div>
+        <button class="btn-primary full" onclick="login()">Login</button>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="signupForm" style="display:none">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signupName" placeholder="John Doe"/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="signupPhone" placeholder="+91 9876543210"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="signupPassword" placeholder="Min 6 characters"/>
+        </div>
+        <div class="form-error" id="signupError"></div>
+        <button class="btn-primary full" onclick="signup()">Create Account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ADD PRODUCT SECTION ===== -->
+  <section class="modal-overlay" id="addProductSection" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📦 List a Product</h2>
+        <button class="close-btn" onclick="hideSection('addProductSection')">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Product Name *</label>
+        <input type="text" id="prodName" placeholder="e.g. iPhone 13 Pro Max"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Price (₹) *</label>
+          <input type="number" id="prodPrice" placeholder="e.g. 45000"/>
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="prodCategory">
+            <option value="">Select…</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="furniture">Furniture</option>
+            <option value="vehicles">Vehicles</option>
+            <option value="books">Books</option>
+            <option value="sports">Sports</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea id="prodDesc" rows="3" placeholder="Describe your product…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Product Image</label>
+        <div class="image-upload-area" id="uploadArea" onclick="document.getElementById('prodImage').click()">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click to upload image</p>
+          <span>PNG, JPG up to 5MB</span>
+          <input type="file" id="prodImage" accept="image/*" style="display:none" onchange="previewImage(event)"/>
+        </div>
+        <img id="imagePreview" class="img-preview" src="" alt="" style="display:none"/>
+      </div>
+      <div class="form-group">
+        <label>Seller Location</label>
+        <input type="text" id="prodLocation" placeholder="e.g. Mumbai, Delhi…"/>
+      </div>
+      <div class="form-error" id="productError"></div>
+      <button class="btn-primary full large" onclick="addProduct()">🚀 Publish Listing</button>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCT DETAIL MODAL ===== -->
+  <section class="modal-overlay" id="productDetail" style="display:none">
+    <div class="modal wide">
+      <div class="modal-header">
+        <h2>Product Details</h2>
+        <button class="close-btn" onclick="hideSection('productDetail')">✕</button>
+      </div>
+      <div id="detailContent"></div>
+    </div>
+  </section>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <p>© 2026 BazaarX · Built with ❤️ · All data stored locally</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

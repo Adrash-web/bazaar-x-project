@@ -509,27 +509,27 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
   }
   const demos = [
 
-  { name: 'iPhone 13 Pro Max 256GB', price: 72000, category: 'electronics', desc: 'Barely used. All accessories included.', location: 'Mumbai',image: 'iphone.jpg' },
-  { name: 'Samsung Galaxy S21', price: 40000, category: 'electronics', desc: 'Good condition, no scratches.', location: 'Delhi', image: 'samsung.jpg' },
-  { name: 'Sony WH-1000XM5 Headphones', price: 25000, category: 'electronics', desc: 'Noise cancelling, excellent sound.', location: 'Bangalore', image:  'electronics.jpg' },
-  { name: 'Dell Laptop i5 11th Gen', price: 50000, category: 'electronics', desc: 'Smooth performance, 8GB RAM.', location: 'Pune', image: 'dell.jpg' },
+  { name: 'iPhone 13 Pro Max 256GB', price: 72000, category: 'electronics', desc: 'Barely used. All accessories included.', location: 'Mumbai',image: './iphone.jpg' },
+  { name: 'Samsung Galaxy S21', price: 40000, category: 'electronics', desc: 'Good condition, no scratches.', location: 'Delhi', image: './samsung.jpg' },
+  { name: 'Sony WH-1000XM5 Headphones', price: 25000, category: 'electronics', desc: 'Noise cancelling, excellent sound.', location: 'Bangalore', image:  './electronics.jpg' },
+  { name: 'Dell Laptop i5 11th Gen', price: 50000, category: 'electronics', desc: 'Smooth performance, 8GB RAM.', location: 'Pune', image: './dell.jpg' },
 
-  { name: "Vintage Levi's 501 Jeans", price: 1800, category: 'fashion', desc: 'Original vintage Levi’s.', location: 'Bangalore', image: 'levis.jpg' },
-  { name: 'Nike Air Max Shoes', price: 3500, category: 'fashion', desc: 'Comfortable and stylish.', location: 'Pune', image: 'nike.jpg' },
-  { name: 'Puma Hoodie', price: 1200, category: 'fashion', desc: 'Warm and trendy.', location: 'Delhi', image: 'puma.jpg' },
-  { name: 'Adidas Track Pants', price: 1500, category: 'fashion', desc: 'Lightweight and sporty.', location: 'Mumbai', image: 'adidas.jpg' },
+  { name: "Vintage Levi's 501 Jeans", price: 1800, category: 'fashion', desc: 'Original vintage Levi’s.', location: 'Bangalore', image: './levis.jpg' },
+  { name: 'Nike Air Max Shoes', price: 3500, category: 'fashion', desc: 'Comfortable and stylish.', location: 'Pune', image: './nike.jpg' },
+  { name: 'Puma Hoodie', price: 1200, category: 'fashion', desc: 'Warm and trendy.', location: 'Delhi', image: './puma.jpg' },
+  { name: 'Adidas Track Pants', price: 1500, category: 'fashion', desc: 'Lightweight and sporty.', location: 'Mumbai', image: './adidas.jpg' },
 
-  { name: 'IKEA MALM Bed Frame', price: 8500, category: 'furniture', desc: 'King size, good condition.', location: 'Delhi', image: 'bed.jpg' },
-  { name: 'Wooden Study Table', price: 3000, category: 'furniture', desc: 'Strong and durable.', location: 'Lucknow', image: 'table.jpg' },
-  { name: 'Office Chair', price: 2500, category: 'furniture', desc: 'Comfortable for long work.', location: 'Chennai', image: 'chair.jpg' },
+  { name: 'IKEA MALM Bed Frame', price: 8500, category: 'furniture', desc: 'King size, good condition.', location: 'Delhi', image: './bed.jpg' },
+  { name: 'Wooden Study Table', price: 3000, category: 'furniture', desc: 'Strong and durable.', location: 'Lucknow', image: './table.jpg' },
+  { name: 'Office Chair', price: 2500, category: 'furniture', desc: 'Comfortable for long work.', location: 'Chennai', image: './chair.jpg' },
 
-  { name: 'Honda Activa 6G', price: 62000, category: 'vehicles', desc: 'Single owner, low km.', location: 'Pune', image: 'activa.jpg' },
-  { name: 'Royal Enfield Classic 350', price: 150000, category: 'vehicles', desc: 'Excellent condition.', location: 'Chandigarh', image: 'royalEnfield.jpg' },
+  { name: 'Honda Activa 6G', price: 62000, category: 'vehicles', desc: 'Single owner, low km.', location: 'Pune', image: './activa.jpg' },
+  { name: 'Royal Enfield Classic 350', price: 150000, category: 'vehicles', desc: 'Excellent condition.', location: 'Chandigarh', image: './royalEnfield.jpg' },
 
-  { name: 'Atomic Habits', price: 350, category: 'books', desc: 'Must read self-help book.', location: 'Hyderabad', image: 'book.jpg' },
-  { name: 'Rich Dad Poor Dad', price: 250, category: 'books', desc: 'Finance learning book.', location: 'Chennai', image: 'book1.jpg' },
+  { name: 'Atomic Habits', price: 350, category: 'books', desc: 'Must read self-help book.', location: 'Hyderabad', image: './book.jpg' },
+  { name: 'Rich Dad Poor Dad', price: 250, category: 'books', desc: 'Finance learning book.', location: 'Chennai', image: './book1.jpg' },
 
-  { name: 'Spalding NBA Basketball', price: 2200, category: 'sports', desc: 'Official size 7.', location: 'Kolkata', image:'basketball.jpg' }
+  { name: 'Spalding NBA Basketball', price: 2200, category: 'sports', desc: 'Official size 7.', location: 'Kolkata', image:'./basketball.jpg' }
 
 ];
 

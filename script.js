@@ -286,11 +286,14 @@ function productCard(p, index) {
   const delay     = Math.min(index * 0.05, 0.5);
   const catEmoji  = catIcon(p.category);
   console.log(p.image);
-  const imgHtml = `
-  <img src="${p.image}"
-       alt="${esc(p.name)}"
-       class="product-img" />
-  `;
+   const imgHtml = p.image
+  ? `<img src="${p.image}" alt="${esc(p.name)}" class="product-img" />`
+  : `<div class="card-img-placeholder">${catEmoji}<span>No image</span></div>`;
+  // const imgHtml = `
+  // <img src="${p.image}"
+  //      alt="${esc(p.name)}"
+  //      class="product-img" />
+  // `;
   // const imgHtml   = p.image
   //   ? `<img src="${p.image}" alt="${esc(p.name)}" loading="lazy"/>`
      `<div class="card-img-placeholder">${catEmoji}<span>No image</span></div>`;
